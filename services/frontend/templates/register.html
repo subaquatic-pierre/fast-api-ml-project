@@ -1,0 +1,65 @@
+{% extends 'layout.html' %} {% block main %}
+
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+  <div class="row align-items-center g-lg-5 py-5">
+    <div class="col-lg-7 text-center text-lg-start">
+      <h1 class="display-4 fw-bold lh-1 mb-3">Register</h1>
+      <p class="col-lg-10 fs-4">Register as a user to apply for API keys</p>
+    </div>
+    <div class="col-md-10 mx-auto col-lg-5">
+      <form id="registerForm" class="p-4 p-md-5 border rounded-3 bg-light">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="fullName" placeholder="Full Name" />
+          <label for="floatingPassword">Full Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="name@example.com"
+          />
+          <label for="floatingInput">Email address</label>
+        </div>
+        <button class="w-100 btn btn-primary" type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('registerForm');
+
+  const handleSubmit = async (data) => {
+    const res = await fetch(`${API_URL}/user`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const fullNameInput = document.getElementById('fullName');
+    const emailInput = document.getElementById('email');
+
+    const data = {
+      fullName: fullName.value,
+      email: emailInput.value
+    };
+
+    if (data.fullName == '' || data.email == '') {
+      alert('Invalid form data');
+      return;
+    }
+
+    await handleSubmit(data);
+
+    window.location.assign('/user');
+  });
+</script>
+
+{% endblock main %}

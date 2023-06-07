@@ -1,0 +1,71 @@
+{% extends 'layout.html' %} {% block main %}
+
+<div class="container">
+  <h1>Cases</h1>
+  <hr />
+  <div class="list-group w-auto">
+    <!-- Loop over users -->
+    {% for case in data %}
+    <div
+      class="d-flex gap-2 list-group-item w-100 py-3 mb-2 border-top justify-content-between align-items-center"
+    >
+      <div>
+        <a href="/case/{{case.id}}" aria-current="true">
+          <h6 class="mb-0">Case ID: {{ case.id }}</h6>
+        </a>
+        <p class="mb-0 opacity-75">User ID: {{ case.userId }}</p>
+        <p class="mb-0 opacity-75">Status: {{ case.status }}</p>
+        <p class="mb-0 opacity-75">Type: {{ case.type }}</p>
+        <p
+          class="mb-0 opacity-75 created-date-display"
+          data-createdDate="{{ case.createdDate }}"
+        >
+          Created Date:
+        </p>
+      </div>
+      <div>
+        <button class="btn btn-danger" data-caseId="{{ case.id }}">
+          Delete
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+    <!-- End loop -->
+  </div>
+</div>
+
+<script>
+  const handleDeleteClick = async (event) => {
+    const caseId = event.target.getAttribute('data-caseId');
+
+    const res = await fetch(`${API_URL}/case/${caseId}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const resData = await res.json();
+    window.location.reload();
+  };
+
+  window.addEventListener('load', () => {
+    const deleteButtons = document.querySelectorAll('button');
+
+    // Convert timestamp to date
+    const createdDate = document.querySelectorAll('.created-date-display');
+    createdDate.forEach((el) => {
+      const createdDate = el.getAttribute('data-createdDate');
+      const date = new Date(Number(createdDate) * 1000);
+      const text = `Created Date: ${date}`;
+      el.innerHTML = text;
+    });
+
+    deleteButtons.forEach((button) => {
+      button.addEventListener('click', handleDeleteClick);
+    });
+  });
+</script>
+
+{% endblock main %}

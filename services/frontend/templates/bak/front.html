@@ -1,0 +1,192 @@
+{% extends 'layout.html' %} {% block main %}
+
+<section class="bg-info" id="about">
+  <div class="container-fluid" style="width: 98%; margin: auto">
+    <div class="row">
+      <a
+        id="btnPrint"
+        class="btn btn-default"
+        style="float: right"
+        href="/uploads/{{maindir}}/report.pdf"
+        download
+        >Export Pdf</a
+      >
+    </div>
+    <br />
+
+    <div id="editor">
+      <div class="row" style="color: white">
+        <div class="col-sm-4">
+          <label style="width: 410px; height: 35px; text-align: center"
+            >Original Image</label
+          >
+        </div>
+        <div class="col-sm-4">
+          <label style="width: 410px; height: 35px; text-align: center"
+            >AI Detected Damages</label
+          >
+        </div>
+      </div>
+      {%for file in data if 'img_id' in file %}
+      <div class="row" style="color: white">
+        <div class="col-sm-4">
+          <a
+            data-magnify="gallery"
+            data-src=""
+            data-caption="Original Image"
+            data-group="a"
+            href="/{{file['original_path']}}?v={{file['img_id']}}"
+          >
+            <img
+              src="/{{file['original_path']}}?v={{file['img_id']}}"
+              alt="Total Process Timing {{file['process_timing']}} Sec"
+              id="{{file['img_id']}}_m"
+              style="width: 100%; height: 480px"
+            />
+          </a>
+        </div>
+        <div class="col-sm-4">
+          <a
+            data-magnify="gallery"
+            data-src=""
+            data-caption="AI Detected Damages"
+            data-group="a"
+            href="/{{file['damage_path']}}?v={{file['img_id']}}"
+          >
+            <img
+              src="/{{file['damage_path']}}?v={{file['img_id']}}"
+              alt="Total Process Timing {{file['process_timing']}} Sec"
+              id="{{file['img_id']}}_o"
+              style="width: 100%; height: 480px"
+            />
+          </a>
+        </div>
+
+        <div class="col-sm-4">
+          <table class="table table-striped" style="font-size: 12px">
+            <thead>
+              <tr>
+                <th>Damage Parts</th>
+                <th>Damage Status</th>
+                <th>Repair Status</th>
+                <th>Item Price</th>
+                <th>Labour Charge</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for inval in file['label_text'] %} {% if inval['issue'] != 'No
+              Damage' %}
+              <tr>
+                <td>{{inval['part']}}</td>
+
+                {% if inval['price'] == '0.00' %}
+                <td colspan="3">{{inval['issue']}}</td>
+                {% else %}
+                <td>
+                  {{inval['issue'] | replace("Bumper Fix", "Bumper Crack")}}
+                </td>
+                {% endif %}
+                <td>{{inval['repair_status']}}</td>
+                {% if inval['price'] != '0.00' %}
+                <td>{{inval['price']}} AED</td>
+                <td>{{inval['labcharge']}} AED</td>
+                {% endif %}
+              </tr>
+              {% endif %} {% else %}
+              <tr>
+                <td colspan="5">No damage found</td>
+              </tr>
+              {%endfor %}
+              <tr style="font-weight: bold; background-color: blueviolet">
+                <td colspan="1">Damage Type</td>
+                <td colspan="4">{{file['damageTypeOfCar']}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <br />
+      {%endfor %}
+    </div>
+    <br /><br />
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <h2 class="section-heading">Let's Get In Touch!</h2>
+        <hr class="primary" />
+        <p>
+          Ready to start your next project with us? That's great! Give us a call
+          or send us an email and we will get back to you as soon as possible!
+        </p>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <div class="form-group">
+          <textarea
+            style="width: 700px; height: 180px; resize: none"
+            placeholder="Comment here"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <button class="btn btn-success" onclick="action('Approved')">
+          Approve
+        </button>
+        <button class="btn btn-warning" onclick="action('Rejected')">
+          Reject
+        </button>
+        <button class="btn btn-info" onclick="action('Open for Binding')">
+          Open for Binding
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p id="x">Aprroved</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap core JavaScript -->
+<script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/popper/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+<!-- Plugin JavaScript -->
+<script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/scrollreveal/scrollreveal.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+
+<!-- Custom scripts for this template -->
+<script src="{{ url_for('static', filename='js/creative.min.js') }}"></script>
+<script>
+  $(document).ready(function () {
+    $('[data-magnify=gallery]').magnify({
+      modalWidth: 320,
+      modalHeight: 320,
+      fixedModalSize: true
+    });
+  });
+</script>
+
+{% endblock main %}

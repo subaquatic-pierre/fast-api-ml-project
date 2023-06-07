@@ -1,0 +1,199 @@
+<html>
+  <head>
+    <title>Assessment Report</title>
+    <meta charset="utf-8" />
+
+    <style>
+      .top-header {
+        width: 100%;
+        height: 120px;
+        background-color: #008080;
+      }
+      #dezzex-ai {
+        width: 100%;
+        text-align: center;
+      }
+      #assessment-overview {
+        width: 100%;
+        text-align: left;
+        margin-left: 90px;
+      }
+      #dezzex-ai,
+      #assessment-overview {
+        color: #ffffff;
+        margin-top: 10px;
+        font-size: 24px;
+      }
+      .dezzex-logo {
+        height: 90px;
+        width: 120px;
+        float: right;
+      }
+      .id-card {
+        height: 120px;
+        width: 120px;
+      }
+      .car-img {
+        height: 280px;
+        width: 280px;
+      }
+      .vl {
+        border-left: 6px solid #fff;
+        height: 80%;
+      }
+      .light-border {
+        border: solid 4px greenyellow;
+        border-radius: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-right: 10px;
+        padding-left: 10px;
+        background-color: #edeef0;
+        text-align: center;
+      }
+      .data-table {
+        width: 100%;
+        margin-top: 30px;
+        text-align: center;
+        border: solid 2px #78797a;
+        border-collapse: collapse;
+        page-break-inside: auto;
+      }
+      .data-table tr {
+        border-collapse: collapse;
+        page-break-inside: avoid;
+        page-break-after: auto;
+      }
+      .data-table th {
+        padding: 6px;
+        text-align: center;
+        border: solid 1px #78797a;
+        background-color: cadetblue;
+        color: #fff;
+        border-collapse: collapse;
+      }
+      .data-table td {
+        padding: 4px;
+        text-align: center;
+        border: solid 1px #78797a;
+        border-collapse: collapse;
+      }
+      .footer {
+        width: 100%;
+        height: 120px;
+        margin-top: 40px;
+      }
+    </style>
+  </head>
+  <body
+    style="background-image: url('{{ datas.bgd }}');background-repeat: repeat-y;background-position: center;background-attachment: fixed;background-size: 100%;"
+  >
+    <table class="top-header" id="myFrame">
+      <tr>
+        <td style="margin-top: 15px; margin-bottom: 15px">
+          <label id="dezzex-ai">Dezzex AI</label>
+        </td>
+        <td>
+          <div class="vl"></div>
+        </td>
+        <td style="margin-top: 15px; margin-bottom: 15px; padding-left: 60px">
+          <div id="assessment-overview">Assessment Report</div>
+          <div id="assessment-overview" style="font-size: 12px">
+            (Print Date: {{datas.print_date}})
+          </div>
+        </td>
+        <td style="margin-top: 15px; margin-bottom: 15px; padding-right: 20px">
+          <img src="{{ datas.logo }}" class="dezzex-logo" />
+        </td>
+      </tr>
+    </table>
+
+    <div
+      style="
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 20px;
+        width: 100%;
+      "
+    >
+      <table class="data-table">
+        <tr>
+          <th style="text-align: center">Original Image</th>
+          <th style="text-align: center">AI Detected Damages</th>
+          <th style="text-align: center">Assessment Report</th>
+        </tr>
+
+        {%for data in datas.row %}
+        <tr>
+          <td style="padding: 5px; padding-bottom: 5px">
+            <img src="{{data.original}}" class="car-img" />
+          </td>
+          <td style="padding: 5px; padding-bottom: 5px">
+            <img src="{{data.damage_annot}}" class="car-img" />
+          </td>
+          <td style="padding: 5px; vertical-align: top">
+            <table class="data-table" style="margin-top: 0px">
+              <tr>
+                <th style="border: solid 1px #000000">Damage Parts</th>
+                <th style="border: solid 1px #000000">Damage Status</th>
+                <th style="border: solid 1px #000000">Repair Status</th>
+              </tr>
+              {%for outval in data.damage_label %} 
+
+              {% if outval['issue'] == "No Damage" %}
+
+              {% else %}
+
+              <tr>
+                <td style="border: solid 1px #000000">{{outval['part']}}</td>
+                <td style="border: solid 1px #000000">
+                  {{outval['issue'] | replace("Bumper Fix", "Bumper Crack")}}
+                </td>
+
+                {% if 'crack' in outval['issue']|lower or 'major' in
+                outval['issue']|lower or 'replace' in outval['issue']|lower or
+                'fix' in outval['issue']|lower or 'windshield' in
+                outval['part']|lower or 'lamp' in outval['part']|lower or
+                'indicator' in outval['part']|lower or 'headlamp' in
+                outval['part']|lower %}
+
+
+                <td style="border: solid 1px #000000">Replace</td>
+
+
+                {% else %}
+
+
+
+                <td style="border: solid 1px #000000">Repair</td>
+
+
+                {% endif %}
+
+
+              </tr>
+
+
+
+
+              {% endif %}
+
+
+
+              
+              
+              {%endfor %}
+
+              <tr style="font-weight: bold; border: solid 1px #000000">
+                <td colspan="3" style="border: solid 1px #000000">
+                  {{data.damage_status}}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        {%endfor %}
+      </table>
+    </div>
+  </body>
+</html>

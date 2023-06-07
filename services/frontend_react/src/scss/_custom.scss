@@ -1,0 +1,43 @@
+// Here you can add other styles
+.sidebar-brand-full {
+  max-height: 40px;
+}
+
+.user-table-row {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+table {
+  width: 100%;
+}
+
+// .table > :not(caption) > * > * {
+//   padding: 0.5rem 0px;
+// }
+
+th.actions {
+  width: 20%;
+}
+
+td > div > button {
+  margin: 0px 5px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.report-car-div {
+  img {
+    max-width: 100%;
+    object-fit: cover;
+  }
+}
+
+.edit-row-cell {
+  input:focus {
+    border: none;
+  }
+}

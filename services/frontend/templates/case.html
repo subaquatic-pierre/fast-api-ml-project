@@ -1,0 +1,184 @@
+{% extends 'layout.html' %} {% block main %}
+
+<div class="container">
+  <div
+    class="d-flex justify-content-between align-items-center"
+    style="width: 100%"
+  >
+    <h5>Case Number: {{ data.id }}</h5>
+    <div>
+      <a href="/case/{{data.id}}/add-vehicle" class="btn btn-primary"
+        >Add vehicle</a
+      >
+      {% if not data.vehicleCount == 2 %}
+      <button id="topViewBtn" class="btn btn-primary mr-1" disabled>
+        Top View
+      </button>
+      {% else %}
+      <button id="topViewBtn" class="btn btn-primary mr-1">Top View</button>
+      {% endif %} {% if data.vehicleCount > 0 %}
+      <button id="pdfReportBtn" class="btn btn-info mr-1">Damage PDF</button>
+      {% else %}
+      <button id="pdfReportBtn" disabled class="btn btn-info mr-1">
+        Damage PDF
+      </button>
+      {% endif %} {% if data.topViewGenerated %}
+      <button id="topViewBtnPdf" class="btn btn-info mr-1">Top View PDF</button>
+      {% else %}
+      <button id="topViewBtnPdf" class="btn btn-info mr-1" disabled>
+        Top View PDF
+      </button>
+      {% endif %}
+      <button id="deleteBtn" class="btn btn-danger">Delete</button>
+    </div>
+  </div>
+  <hr />
+  <div class="list-group w-auto">
+    <!-- Loop over API keys -->
+    <div
+      class="d-flex gap-2 list-group-item w-100 py-3 mb-2 border-top justify-content-between align-items-center"
+    >
+      <div>
+        <p class="mb-0 opacity-75">User ID: {{ data.userId }}</p>
+        <p class="mb-0 opacity-75">Status: {{ data.status }}</p>
+        <p class="mb-0 opacity-75">Type: {{ data.type }}</p>
+        <p class="mb-0 opacity-75">Vehicle Count: {{ data.vehicleCount }}</p>
+        <p class="mb-0 opacity-75">
+          Report Generated: {{ data.reportGenerated }}
+        </p>
+        <p class="mb-0 opacity-75">
+          Top View Generated: {{ data.topViewGenerated }}
+        </p>
+        <p class="mb-0 opacity-75">
+          Report URL: {% if data.reportUrl %}
+          <a href="{{ data.reportUrl }}" target="_blank"
+            >{{ data.reportUrl }}
+          </a>
+          {% endif %}
+        </p>
+        <p class="mb-0 opacity-75">
+          PDF Report URL: {% if data.reportUrlPdf %}
+          <a href="{{ data.reportUrlPdf }}" target="_blank"
+            >{{ data.reportUrlPdf }}
+          </a>
+          {% endif %}
+        </p>
+        <p class="mb-0 opacity-75">
+          Top View PDF Report URL: {% if data.reportUrlPdfTopView %}
+          <a href="{{ data.reportUrlPdfTopView }}" target="_blank"
+            >{{ data.reportUrlPdfTopView }}
+          </a>
+          {% endif %}
+        </p>
+        <p
+          class="mb-0 opacity-75"
+          data-expDate="{{ data.createdDate }}"
+          id="created-date-display"
+        >
+          Created Date:
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="d-flex gap-2 list-group-item w-100 py-3 mb-2 border-top justify-content-between align-items-center"
+    >
+      <div>
+        <p class="mb-0 opacity-75">Report:</p>
+        <pre id="reportDiv"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.addEventListener('load', async () => {
+    // const caseId = "{{ data.id }}"
+    const caseId = '{{ data.id }}';
+    const caseStatus = '{{ data.status }}';
+    const createdDate = '{{ data.createdDate }}';
+
+    const res = await fetch(`${API_URL}/case/${caseId}/status`);
+    const resData = await res.json();
+
+    if (caseStatus !== 'CAR_ADDED') {
+      const intervalId = setInterval(async () => {
+        const res = await fetch(`${API_URL}/case/${caseId}/status`);
+        const resData = await res.json();
+
+        if (resData.data.status === 'CAR_ADDED') {
+          window.location.reload();
+        }
+
+        if (
+          resData.response_type === 'error' ||
+          resData.data.status === 'CAR_ADDED' ||
+          resData.data.status === 'STARTED' ||
+          resData.data.status === 'TOP_VIEW_CREATED' ||
+          resData.data.status === 'FAILED'
+        ) {
+          clearInterval(intervalId);
+        }
+      }, 2000);
+    }
+
+    // Update created date
+    const createdDateEl = document.getElementById('created-date-display');
+    const date = new Date(Number(createdDate) * 1000);
+    const text = `Created Date: ${date}`;
+    createdDateEl.innerHTML = text;
+
+    const reportGenerated = '{{data.reportGenerated}}';
+    if (reportGenerated == 'True') {
+      try {
+        const reportStr = '{{ data.report|tojson }}';
+        const reportJson = JSON.parse(reportStr);
+        const reportDiv = document.getElementById('reportDiv');
+        reportDiv.innerHTML = JSON.stringify(reportJson, null, 2);
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      console.log('no report generated');
+    }
+
+    // Delete case
+    const deleteCaseBtn = document.getElementById('deleteBtn');
+    deleteCaseBtn.addEventListener('click', async () => {
+      const res = await fetch(`${API_URL}/case/${caseId}`, {
+        method: 'DELETE'
+      });
+      const data = await res.json();
+      console.log(data);
+      window.location.assign('/case');
+    });
+
+    // PDF ASSESSMENT REPORT BUTTON
+    const generatePdfReportBtn = document.getElementById('pdfReportBtn');
+    generatePdfReportBtn.addEventListener('click', async () => {
+      const res = await fetch(
+        `${API_URL}/case/${caseId}/damage-assessment-pdf-report`
+      );
+      const data = await res.json();
+      window.location.reload();
+    });
+
+    // TOP VIEW REPORT BUTTON
+    const generateTopViewReport = document.getElementById('topViewBtn');
+    generateTopViewReport.addEventListener('click', async () => {
+      const res = await fetch(`${API_URL}/case/${caseId}/top-view`);
+      const data = await res.json();
+      window.location.reload();
+    });
+
+    // TOP VIEW REPORT BUTTON
+    const generateTopViewReportPdf = document.getElementById('topViewBtnPdf');
+    generateTopViewReportPdf.addEventListener('click', async () => {
+      const res = await fetch(`${API_URL}/case/${caseId}/top-view-pdf-report`);
+      const data = await res.json();
+      window.location.reload();
+    });
+  });
+</script>
+
+{% endblock main %}

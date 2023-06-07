@@ -1,0 +1,659 @@
+[
+  {
+    "img_id": "0",
+    "car_no": "1",
+    "original_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09021.jpg",
+    "image_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09021_annotated.jpg",
+    "damage_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09021_damage_annotated.jpg",
+    "marker_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09021_marker.jpg",
+    "panel_text": ["rear bumper", "boot"],
+    "label_text": [
+      {
+        "part": "Rear Bumper",
+        "issue": "Dent Minor, Scratch",
+        "repair_status": "Repair",
+        "price": "500.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Boot",
+        "issue": "Dent Minor, Scratch",
+        "repair_status": "Repair",
+        "price": "500.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Unidentified Panel",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      }
+    ],
+    "process_timing": "24.88",
+    "damage_type_of_car": "Major"
+  },
+  {
+    "img_id": "1",
+    "car_no": "1",
+    "original_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09008.jpg",
+    "image_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09008_annotated.jpg",
+    "damage_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09008_damage_annotated.jpg",
+    "marker_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09008_marker.jpg",
+    "panel_text": [
+      "right fender",
+      "right headlamp",
+      "bonnet",
+      "boot",
+      "rear bumper",
+      "front bumper"
+    ],
+    "label_text": [
+      {
+        "part": "Front Bumper",
+        "issue": "Scratch, Bumper Fix",
+        "repair_status": "Replace",
+        "price": "800.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Boot",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Right Headlamp",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Bonnet",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Right Fender",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Rear Bumper",
+        "issue": "Scratch, Bumper Fix",
+        "repair_status": "Replace",
+        "price": "800.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Unidentified Panel",
+        "issue": "Bumper Fix",
+        "repair_status": "Replace",
+        "price": "800.00",
+        "labcharge": "200.00"
+      }
+    ],
+    "process_timing": "22.70",
+    "damage_type_of_car": "Major"
+  },
+  {
+    "img_id": "2",
+    "car_no": "1",
+    "original_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09013.jpg",
+    "image_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09013_annotated.jpg",
+    "damage_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09013_damage_annotated.jpg",
+    "marker_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09013_marker.jpg",
+    "panel_text": [
+      "left fender",
+      "front grill",
+      "bonnet",
+      "left headlamp",
+      "front bumper"
+    ],
+    "label_text": [
+      {
+        "part": "Front Bumper",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Bonnet",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Front Grill",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Left Headlamp",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Left Fender",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Unidentified Panel",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      }
+    ],
+    "process_timing": "23.18",
+    "damage_type_of_car": "No Damage"
+  },
+  {
+    "img_id": "3",
+    "car_no": "1",
+    "original_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09006.jpg",
+    "image_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09006_annotated.jpg",
+    "damage_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09006_damage_annotated.jpg",
+    "marker_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09006_marker.jpg",
+    "panel_text": ["right headlamp", "front bumper"],
+    "label_text": [
+      {
+        "part": "Front Bumper",
+        "issue": "Bumper Fix, Scratch",
+        "repair_status": "Replace",
+        "price": "800.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Right Headlamp",
+        "issue": "Crack",
+        "repair_status": "Replace",
+        "price": "800.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Unidentified Panel",
+        "issue": "Bumper Fix",
+        "repair_status": "Replace",
+        "price": "800.00",
+        "labcharge": "200.00"
+      }
+    ],
+    "process_timing": "23.75",
+    "damage_type_of_car": "Major"
+  },
+  {
+    "img_id": "4",
+    "car_no": "1",
+    "original_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09019.jpg",
+    "image_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09019_annotated.jpg",
+    "damage_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09019_damage_annotated.jpg",
+    "marker_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09019_marker.jpg",
+    "panel_text": ["left tail lamp", "rear bumper", "boot"],
+    "label_text": [
+      {
+        "part": "Rear Bumper",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Boot",
+        "issue": "Dent Minor, Crack, Dent Medium",
+        "repair_status": "Replace",
+        "price": "800.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Left Tail Lamp",
+        "issue": "Crack",
+        "repair_status": "Replace",
+        "price": "800.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Unidentified Panel",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      }
+    ],
+    "process_timing": "23.68",
+    "damage_type_of_car": "Major"
+  },
+  {
+    "img_id": "5",
+    "car_no": "1",
+    "original_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09005.jpg",
+    "image_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09005_annotated.jpg",
+    "damage_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09005_damage_annotated.jpg",
+    "marker_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09005_marker.jpg",
+    "panel_text": [
+      "right fender",
+      "right orvm",
+      "right headlamp",
+      "front grill",
+      "bonnet",
+      "right rear door",
+      "right front door",
+      "right running board",
+      "front windshield",
+      "front bumper"
+    ],
+    "label_text": [
+      {
+        "part": "Front Windshield",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Front Bumper",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Bonnet",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Front Grill",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Right Orvm",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Right Front Door",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Right Fender",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Right Headlamp",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Right Rear Door",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Right Running Board",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Unidentified Panel",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      }
+    ],
+    "process_timing": "22.63",
+    "damage_type_of_car": "No Damage"
+  },
+  {
+    "img_id": "6",
+    "car_no": "1",
+    "original_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09018.jpg",
+    "image_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09018_annotated.jpg",
+    "damage_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09018_damage_annotated.jpg",
+    "marker_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09018_marker.jpg",
+    "panel_text": [
+      "left rear door",
+      "left quarter panel",
+      "boot",
+      "left tail lamp",
+      "rear bumper"
+    ],
+    "label_text": [
+      {
+        "part": "Rear Bumper",
+        "issue": "Scratch",
+        "repair_status": "Repair",
+        "price": "500.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Boot",
+        "issue": "Dent Minor",
+        "repair_status": "Repair",
+        "price": "500.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Left Rear Door",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Left Tail Lamp",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Left Quarter Panel",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Unidentified Panel",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      }
+    ],
+    "process_timing": "24.61",
+    "damage_type_of_car": "Major"
+  },
+  {
+    "img_id": "7",
+    "car_no": "1",
+    "original_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09007.jpg",
+    "image_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09007_annotated.jpg",
+    "damage_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09007_damage_annotated.jpg",
+    "marker_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09007_marker.jpg",
+    "panel_text": [
+      "right fender",
+      "right headlamp",
+      "bonnet",
+      "right quarter panel",
+      "front bumper"
+    ],
+    "label_text": [
+      {
+        "part": "Front Bumper",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Right Headlamp",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Right Fender",
+        "issue": "Scratch, Bumper Fix",
+        "repair_status": "Replace",
+        "price": "800.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Bonnet",
+        "issue": "Scratch",
+        "repair_status": "Repair",
+        "price": "500.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Right Quarter Panel",
+        "issue": "Scratch, Bumper Fix",
+        "repair_status": "Replace",
+        "price": "800.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Unidentified Panel",
+        "issue": "Bumper Fix",
+        "repair_status": "Replace",
+        "price": "800.00",
+        "labcharge": "200.00"
+      }
+    ],
+    "process_timing": "23.65",
+    "damage_type_of_car": "Major"
+  },
+  {
+    "img_id": "8",
+    "car_no": "1",
+    "original_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09004.jpg",
+    "image_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09004_annotated.jpg",
+    "damage_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09004_damage_annotated.jpg",
+    "marker_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09004_marker.jpg",
+    "panel_text": [
+      "right orvm",
+      "left orvm",
+      "right headlamp",
+      "front grill",
+      "bonnet",
+      "left headlamp",
+      "front windshield",
+      "number plate",
+      "front bumper"
+    ],
+    "label_text": [
+      {
+        "part": "Front Windshield",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Bonnet",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Front Bumper",
+        "issue": "Scratch",
+        "repair_status": "Repair",
+        "price": "500.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Number Plate",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Front Grill",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Right Orvm",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Left Orvm",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Left Headlamp",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Right Headlamp",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Unidentified Panel",
+        "issue": "Dent Minor",
+        "repair_status": "Repair",
+        "price": "500.00",
+        "labcharge": "200.00"
+      }
+    ],
+    "process_timing": "7.90",
+    "damage_type_of_car": "Minor"
+  },
+  {
+    "img_id": "9",
+    "car_no": "1",
+    "original_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09009.jpg",
+    "image_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09009_annotated.jpg",
+    "damage_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09009_damage_annotated.jpg",
+    "marker_path": "https://accident-ai-uploads.s3.amazonaws.com/62b94327596cd067e8fe7e92/1_DSC09009_marker.jpg",
+    "panel_text": [
+      "right fender",
+      "tyre",
+      "right headlamp",
+      "bonnet",
+      "front bumper",
+      "boot",
+      "rim",
+      "right running board",
+      "front windshield",
+      "right front door"
+    ],
+    "label_text": [
+      {
+        "part": "Front Bumper",
+        "issue": "Scratch",
+        "repair_status": "Repair",
+        "price": "500.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Bonnet",
+        "issue": "Scratch",
+        "repair_status": "Repair",
+        "price": "500.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Right Front Door",
+        "issue": "Scratch",
+        "repair_status": "Repair",
+        "price": "500.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Right Fender",
+        "issue": "Scratch, Bumper Fix",
+        "repair_status": "Replace",
+        "price": "800.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Boot",
+        "issue": "Scratch",
+        "repair_status": "Repair",
+        "price": "500.00",
+        "labcharge": "200.00"
+      },
+      {
+        "part": "Tyre",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Right Headlamp",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Right Running Board",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Rim",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Front Windshield",
+        "issue": "No Damage",
+        "repair_status": "",
+        "price": "0.00",
+        "labcharge": "0.00"
+      },
+      {
+        "part": "Unidentified Panel",
+        "issue": "Bumper Fix",
+        "repair_status": "Replace",
+        "price": "800.00",
+        "labcharge": "200.00"
+      }
+    ],
+    "process_timing": "7.73",
+    "damage_type_of_car": "Major"
+  }
+]
+

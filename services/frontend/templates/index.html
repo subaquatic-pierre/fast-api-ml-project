@@ -1,0 +1,51 @@
+{% extends 'layout.html' %} {% block main %}
+
+<div class="px-4 py-5 my-5 text-center">
+  <img
+    class="d-block mx-auto mb-4"
+    src="{{url_for('static', filename='img/DezzexLogo.svg')}}"
+    alt=""
+    width="72"
+    height="57"
+  />
+  <h1 class="display-5 fw-bold">AI in Auto Insurance</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">
+      Our new AI algorithms can be applied to images of vehicle's damage and
+      allowing for automated damage detection and claim classification. Our
+      model is not limited to claim, but anyone who need automated damage
+      assessment on vehicles, like Insurance Companies, Garage, anyone can use
+      our API and makes your job easier.
+    </p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <a href="/new-case" class="btn btn-primary px-4 gap-3" role="'button">
+        New Case
+      </a>
+      <!-- <a role="'button" class="btn btn-outline-secondary  px-4">
+        Secondary
+      </a>
+      <a role="'button" class="btn btn-outline-secondary  px-4">
+        Secondary
+      </a> -->
+    </div>
+  </div>
+</div>
+
+{#
+<script>
+  const btn = document.getElementById('button');
+  btn.addEventListener('click', async () => {
+    const res = await fetch(`${API_URL}/task`);
+    const data = await res.json();
+
+    console.log(data);
+  });
+  const btn2 = document.getElementById('button2');
+  btn2.addEventListener('click', async () => {
+    const res = await fetch(`${API_URL}/tasks`);
+    const data = await res.json();
+
+    console.log(data);
+  });
+</script>
+#} {% endblock main %}

@@ -1,0 +1,163 @@
+{% extends 'layout.html' %} {% block main %}
+
+<div class="container">
+  <h3>User Name: {{data.user.fullName}}</h3>
+  <hr />
+  <div
+    class="d-flex justify-content-between align-items-center"
+    style="width: 100%"
+  >
+    <h5>Cases</h5>
+    <div>
+      <a href="/new-case" class="btn btn-primary">New Case</a>
+    </div>
+  </div>
+  <hr />
+  <div class="list-group w-auto">
+    <!-- Loop over API keys -->
+    {% for case in data.cases %}
+    <div
+      class="d-flex gap-2 list-group-item w-100 py-3 mb-2 border-top justify-content-between align-items-center"
+    >
+      <div>
+        <a href="/case/{{case.id}}" aria-current="true">
+          <h6 class="mb-0">Case Number: {{ case.id }}</h6>
+        </a>
+        <p class="mb-0 opacity-75">Status: {{ case.userId }}</p>
+        <p class="mb-0 opacity-75">Type: {{ case.userId }}</p>
+        <p
+          class="mb-0 opacity-75 created-date-display"
+          data-expDate="{{ case.createdDate }}"
+        >
+          Date Created:
+        </p>
+      </div>
+      <div>
+        <button
+          class="btn btn-danger delete-case-key-btn"
+          data-caseId="{{ case.id }}"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+    <!-- End loop -->
+  </div>
+  <hr />
+  <div
+    class="d-flex justify-content-between align-items-center"
+    style="width: 100%"
+  >
+    <h5>API Keys</h5>
+    <button id="generateApiKeyButton" class="btn btn-primary">
+      Generate Key
+    </button>
+  </div>
+  <hr />
+  <div class="list-group w-auto">
+    <!-- Loop over API keys -->
+    {% for api_key in data.api_keys %}
+    <div
+      class="d-flex gap-2 list-group-item w-100 py-3 mb-2 border-top justify-content-between align-items-center"
+    >
+      <div>
+        <a href="/api_key/{{api_key.id}}" aria-current="true">
+          <h6 class="mb-0">API Key: {{ api_key.key }}</h6>
+        </a>
+        <p class="mb-0 opacity-75">User ID: {{ api_key.userId }}</p>
+        <p
+          class="mb-0 opacity-75 expirate-date-display"
+          data-expDate="{{ api_key.expirationDate }}"
+        >
+          Expiration Date:
+        </p>
+      </div>
+      <div>
+        <button
+          class="btn btn-danger delete-api-key-btn"
+          data-apiKeyId="{{ api_key.id }}"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+    <!-- End loop -->
+  </div>
+</div>
+
+<script>
+  const genBtn = document.getElementById('generateApiKeyButton');
+  genBtn.addEventListener('click', async () => {
+    const data = {
+      userId: '{{data.user.id}}',
+      expirationDays: '7'
+    };
+
+    const res = await fetch(`${API_URL}/api-key`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    const resData = await res.json();
+    // console.log(resData);
+    // window.location.reload();
+  });
+
+  window.addEventListener('load', () => {
+    // Convert timestamp to date
+    const expirationDateDisplay = document.querySelectorAll(
+      '.expirate-date-display'
+    );
+    expirationDateDisplay.forEach((el) => {
+      const elExpDate = el.getAttribute('data-expDate');
+      const date = new Date(Number(elExpDate) * 1000);
+      const text = `Expiration Date: ${date}`;
+      el.innerHTML = text;
+    });
+
+    // Add delete listener to each button
+    const deleteCaseBtn = document.querySelectorAll('.delete-case-key-btn');
+    deleteCaseBtn.forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const caseId = btn.getAttribute('data-caseId');
+        const url = `${API_URL}/case/${caseId}`;
+        const res = await fetch(url, {
+          method: 'DELETE',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          }
+        });
+        const resData = await res.json();
+        // console.log(resData);
+        window.location.reload();
+      });
+    });
+
+    // Add delete listener to each button
+    const deleteApiKey = document.querySelectorAll('.delete-api-key-btn');
+    deleteApiKey.forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const apiKeyId = btn.getAttribute('data-apiKeyId');
+        const url = `${API_URL}/api-key/${apiKeyId}`;
+        const res = await fetch(url, {
+          method: 'DELETE',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          }
+        });
+        const resData = await res.json();
+        window.location.reload();
+      });
+    });
+  });
+</script>
+
+{% endblock main %}

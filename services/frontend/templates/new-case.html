@@ -1,0 +1,139 @@
+{% extends 'layout.html' %} {% block main %}
+
+<div class="container col-xxl-8 px-4 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-10 col-sm-8 col-lg-6">
+      <h4 class="">Add New Case Data</h4>
+      <div>
+        <form
+          action="upload"
+          id="img-upload-form"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div style="margin-top: 5rem">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="type"
+                placeholder="DAMAGE_ASSESSMENT"
+              />
+              <label for="floatingInput">Case Type</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="apiKey"
+                placeholder="xxxxx"
+              />
+              <label for="floatingInput">API Key</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="userId"
+                placeholder="xxxxx"
+              />
+              <label for="floatingInput">User ID</label>
+            </div>
+            <input
+              id="submitBtn"
+              type="submit"
+              class="btn btn-success"
+              value="Submit"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <h1 class="display-5 fw-bold lh-1 mb-3">Create New Case</h1>
+      <p class="text-faded">
+        Artificial intelligence (AI) systems, blending data and advanced
+        algorithms to mimic the cognitive functions of the human mind, have
+        begun to simplify and enhance even the simplest aspects of our everyday
+        experiences — and the automotive industry is no exception.
+      </p>
+      <br />
+      <p class="text-faded">
+        Vehicle telematics devices track variables such as speed patterns,
+        location, hard braking, environment and weather. Auto-insurance
+        companies can classify drivers into various risk groups can be done by
+        more accurately by leveraging machine learning with this data. The
+        technology allows for a classification process that is automated and
+        error-proof. Besides risk group classification, Deep Learning algorithms
+        can be applied to images of vehicle damage, allowing for automated claim
+        classification.
+      </p>
+      <br />
+    </div>
+  </div>
+</div>
+
+<!-- Handle form submit -->
+
+<script>
+  const form = document.getElementById('img-upload-form');
+  form.addEventListener('submit', async (e) => {
+    const apiKey = document.getElementById('apiKey').value;
+    const userId = document.getElementById('userId').value;
+
+    e.preventDefault();
+    document.getElementById('submitBtn').disabled = true;
+
+    const data = {
+      apiKey: '62a1af0533359db7415ef0ab:giS82NIEJy5KJwR135Mw5g',
+      userId: userId,
+      type: 'DAMAGE_ASSESSMENT'
+    };
+
+    const res = await fetch(`${API_URL}/case`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    const resData = await res.json();
+
+    // if (resData.response_type === 'created') {
+    //   window.location.assign(`/case/${resData.data.id}`);
+    // }
+  });
+</script>
+
+<!-- Modal -->
+{% if error %}
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-warning">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+        <h4 class="modal-title">Error</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{ error }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('#myModal').modal('show');
+    $('.file').focus();
+  });
+</script>
+{% endif %} {% endblock main %}

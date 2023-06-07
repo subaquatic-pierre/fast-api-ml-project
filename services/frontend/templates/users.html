@@ -1,0 +1,54 @@
+{% extends 'layout.html' %} {% block main %}
+
+<div class="container">
+  <h1>Users</h1>
+  <hr />
+  <div class="list-group w-auto">
+    <!-- Loop over users -->
+    {% for user in data %}
+    <div
+      class="d-flex gap-2 list-group-item w-100 py-3 mb-2 border-top justify-content-between align-items-center"
+    >
+      <div>
+        <a href="/user/{{user.id}}" aria-current="true">
+          <h6 class="mb-0">User Name: {{ user.fullName }}</h6>
+        </a>
+        <p class="mb-0 opacity-75">UUID: {{ user.id }}</p>
+        <p class="mb-0 opacity-75">Email: {{ user.email }}</p>
+      </div>
+      <div>
+        <button class="btn btn-danger" data-userId="{{ user.id }}">
+          Delete
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+    <!-- End loop -->
+  </div>
+</div>
+
+<script>
+  const handleDeleteClick = async (event) => {
+    const userId = event.target.getAttribute('data-userId');
+
+    const res = await fetch(`${API_URL}/user/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    window.location.reload();
+  };
+
+  window.addEventListener('load', () => {
+    const deleteButtons = document.querySelectorAll('button');
+
+    deleteButtons.forEach((button) => {
+      button.addEventListener('click', handleDeleteClick);
+    });
+  });
+</script>
+
+{% endblock main %}

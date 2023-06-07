@@ -1,0 +1,144 @@
+version: "3.8"
+
+services:
+  api:
+    container_name: accident-ai-api
+    build:
+      context: services/api
+      dockerfile: Dockerfile
+    command: python main.py
+    volumes:
+      - ./services/api/:/app/
+      - ./uploads/:/app/uploads/
+    ports:
+      - 5000:5000
+    env_file:
+      - ./.env
+    restart: always
+    networks:
+      - accident-ai
+
+  # celery-worker:
+  #   container_name: celery-worker
+  #   build: 
+  #     context: services/api
+  #     dockerfile: Dockerfile
+  #   command: celery worker --app=broker.worker.celery --loglevel=info -P gevent
+  #   volumes:
+  #     - ./services/api/:/app/
+  #   env_file:
+  #     - ./.env
+  #   depends_on:
+  #     - redis
+  #   networks:
+  #     - accident-ai
+
+  # worker:
+  #   container_name: accident-ai-worker
+  #   runtime: nvidia
+  #   build:
+  #     context: services/worker
+  #     dockerfile: Dockerfile
+  #   command: python3 main.py
+  #   volumes:
+  #     - ./services/worker/:/app/
+  #     - ./uploads/:/app/uploads/
+  #   links:
+  #     - api
+  #   ports:
+  #     - 4000:4000
+  #   devices:
+  #     - /dev/nvidia0:/dev/nvidia0
+  #     - /dev/nvidiactl:/dev/nvidiactl
+  #     - /dev/nvidia-modeset:/dev/nvidia-modeset
+  #     - /dev/nvidia-uvm:/dev/nvidia-uvm
+  #     - /dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools
+  #   env_file:
+  #     - ./.env
+  #   restart: always
+  #   networks:
+  #     - accident-ai
+
+  mongodb:
+    image: mongo:4.0.8
+    container_name: accident-ai-mongodb
+    restart: always
+    command: mongod
+    environment:
+      MONGO_INITDB_DATABASE: accident_ai_app
+      MONGODB_DATA_DIR: /data/db
+      MONDODB_LOG_DIR: /data/
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data:/data/db
+    networks:
+      - accident-ai
+
+  frontend-react:
+    container_name: accident-ai-frontend-react
+    build:
+      context: services/frontend_react
+      dockerfile: Dockerfile
+    command: npm start
+    volumes:
+      - ./services/frontend_react/:/app/
+    ports:
+      - 3001:3001
+    env_file:
+      - ./.env
+    environment:
+      - PORT=3001
+    restart: always
+    depends_on:
+      - api
+    networks:
+      - accident-ai
+
+
+  frontend:
+    container_name: accident-ai-frontend
+    build:
+      context: services/frontend
+      dockerfile: Dockerfile
+    command: python main.py
+    volumes:
+      - ./services/frontend/:/app/
+    ports:
+      - 3000:3000
+    env_file:
+      - ./.env
+    restart: always
+    depends_on:
+      - api
+    networks:
+      - accident-ai
+  # redis:
+  #   container_name: redis
+  #   image: library/redis:5.0-alpine
+  #   networks:
+  #   - accident-ai
+
+  # jaeger:
+  #   image: jaegertracing/all-in-one
+  #   ports:
+  #     - "5775:5775/udp"
+  #     - "6831:6831/udp"
+  #     - "6832:6832/udp"
+  #     - "5778:5778"
+  #     - "16686:16686"
+  #     - "14268:14268"
+  #     - "9411:9411"
+  #   restart: always
+  #   networks:
+  #     - saleor-backend-tier
+
+networks:
+  accident-ai:
+
+
+volumes:
+  data:
+    driver: local
+  uploads:
+    driver: local

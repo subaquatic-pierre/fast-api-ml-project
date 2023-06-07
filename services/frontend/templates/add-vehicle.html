@@ -1,0 +1,273 @@
+{% extends 'layout.html' %} {% block main %}
+
+<div class="container col-xxl-8 px-4 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-10 col-sm-8 col-lg-6">
+      <h4 class="">Select car images and click on Start Assessment button</h4>
+      <div>
+        <form
+          action="upload"
+          id="img-upload-form"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="white-box">
+            <div class="grid-x grid-padding-x">
+              <div
+                class="small-10 small-offset-1 medium-8 medium-offset-2 cell"
+              >
+                <p>
+                  <label for="upload_imgs" class="button hollow"
+                    >Browse Car Images +<br /><small
+                      >(Max 10 images)</small
+                    ></label
+                  >
+                  <input
+                    type="file"
+                    name="files[]"
+                    id="upload_imgs"
+                    accept=".jpg,.jpeg"
+                    multiple="true"
+                    autocomplete="off"
+                    class="file show-for-sr"
+                    required
+                  />
+                </p>
+                <div
+                  class="quote-imgs-thumbs quote-imgs-thumbs--hidden"
+                  id="img_preview"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 5rem">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="apiKey"
+                placeholder="xxxxx"
+              />
+              <label for="floatingInput">API Key</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="userId"
+                placeholder="xxxxx"
+              />
+              <label for="floatingInput">User ID</label>
+            </div>
+            <input
+              id="submitBtn"
+              type="submit"
+              class="btn btn-success"
+              value="Submit"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <h1 class="display-5 fw-bold lh-1 mb-3">Add Vehicle</h1>
+      <p class="text-faded">
+        Artificial intelligence (AI) systems, blending data and advanced
+        algorithms to mimic the cognitive functions of the human mind, have
+        begun to simplify and enhance even the simplest aspects of our everyday
+        experiences — and the automotive industry is no exception.
+      </p>
+      <br />
+      <p class="text-faded">
+        Vehicle telematics devices track variables such as speed patterns,
+        location, hard braking, environment and weather. Auto-insurance
+        companies can classify drivers into various risk groups can be done by
+        more accurately by leveraging machine learning with this data. The
+        technology allows for a classification process that is automated and
+        error-proof. Besides risk group classification, Deep Learning algorithms
+        can be applied to images of vehicle damage, allowing for automated claim
+        classification.
+      </p>
+      <br />
+    </div>
+  </div>
+</div>
+
+<script>
+  var imgUpload = document.getElementById('upload_imgs'),
+    imgPreview = document.getElementById('img_preview'),
+    imgUploadForm = document.getElementById('img-upload-form'),
+    totalFiles = 0,
+    previewTitle,
+    previewTitleText,
+    img;
+
+  imgUpload.addEventListener('change', previewImgs, false);
+  function previewImgs(event) {
+    imgPreview.innerHTML = '';
+
+    totalFiles = imgUpload.files.length > 10 ? 10 : imgUpload.files.length;
+
+    if (!!totalFiles) {
+      imgPreview.classList.remove('quote-imgs-thumbs--hidden');
+      previewTitle = document.createElement('p');
+      previewTitle.style.fontWeight = 'bold';
+      if (totalFiles > 1)
+        previewTitleText = document.createTextNode(
+          'Total ' + totalFiles + ' Images Selected'
+        );
+      else
+        previewTitleText = document.createTextNode(
+          totalFiles + ' Image Selected'
+        );
+      previewTitle.appendChild(previewTitleText);
+      imgPreview.appendChild(previewTitle);
+    }
+
+    for (var i = 0; i < totalFiles; i++) {
+      img = document.createElement('img');
+      img.src = URL.createObjectURL(event.target.files[i]);
+      img.classList.add('img-preview-thumb');
+      imgPreview.appendChild(img);
+    }
+  }
+</script>
+<script>
+  $(document).on('click', '.browse', function () {
+    var file = $(this).parent().parent().parent().find('.file');
+    file.trigger('click');
+  });
+
+  $(document).on('change', '.file', function () {
+    var $fileUpload = $("input[type='file']");
+    if (parseInt($fileUpload.get(0).files.length) > 10) {
+      let list = new DataTransfer();
+      for (let i = 0; i < 10; i++) list.items.add($fileUpload.get(0).files[i]);
+
+      $fileUpload.get(0).files = list.files;
+      alert('You can only upload a maximum of 10 images');
+      $("input[type='submit']").show('slow');
+      //$fileUpload.val("");
+    } else {
+      $("input[type='submit']").show('slow');
+      $(this)
+        .parent()
+        .find('.form-control')
+        .val(
+          $(this)
+            .val()
+            .replace(/C:\\fakepath\\/i, '')
+        );
+    }
+  });
+</script>
+
+<!-- Handle form submit -->
+
+<script>
+  const fileList = [];
+  const caseId =
+    window.location.href.split('/')[window.location.href.split('/').length - 2];
+
+  // const processFile = async (file) => {
+  //   const imageObj = {
+  //     fileName: file.name,
+  //     base64Str: await file.text()
+  //   };
+  //   fileList.push(fileObj);
+
+  //   // const fileName = file.file;
+  //   // const fileReader = new FileReader(file);
+  //   // fileReader.onload = () => {
+  //   //   const base64Str = fileReader.readAsBinaryString();
+
+  //   //   fileList.push(fileObj);
+  //   // };
+  // };
+
+  const apiKey = document.getElementById('apiKey').value;
+  const userId = document.getElementById('userId').value;
+  const fileUpload = document.getElementById('upload_imgs');
+  const form = document.getElementById('img-upload-form');
+  const formData = new FormData();
+
+  const files = fileUpload.files;
+
+  const reader = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.onload = () => resolve(fileReader.result);
+      fileReader.readAsDataURL(file);
+    });
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    document.getElementById('submitBtn').disabled = true;
+
+    for (let i = 0; i < fileUpload.files.length; i++) {
+      const file = fileUpload.files[i];
+
+      const fileReader = new FileReader();
+
+      const imageObj = {
+        fileName: file.name,
+        base64Str: await reader(file)
+      };
+
+      fileList.push(imageObj);
+    }
+
+    const data = {
+      apiKey: '62a1af0533359db7415ef0ab:giS82NIEJy5KJwR135Mw5g',
+      userId: '62a87d9de0adaa54574ce256',
+      fileList
+    };
+
+    const res = await fetch(`${API_URL}/case/${caseId}/add-vehicle/v2`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    const resData = await res.json();
+
+    // if (resData.response_type === 'created') {
+    //   window.location.assign(`/case/${resData.data.id}`);
+    // }
+  });
+</script>
+
+<!-- Modal -->
+{% if error %}
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-warning">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+        <h4 class="modal-title">Error</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{ error }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('#myModal').modal('show');
+    $('.file').focus();
+  });
+</script>
+{% endif %} {% endblock main %}
